@@ -1,2 +1,3 @@
 https://codingblast.com/asp-net-core-signalr-chat-angular/
 https://github.com/Ibro/SignalRSimpleChat
+https://medium.com/@berkokur/a-real-life-scenario-implementation-with-angular-8-and-asp-net-core-signalr-3ad7e5a46fca
