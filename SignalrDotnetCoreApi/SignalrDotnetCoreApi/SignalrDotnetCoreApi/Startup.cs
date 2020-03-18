@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Unity;
 
 namespace SignalrDotnetCoreApi
 {
@@ -31,6 +32,8 @@ namespace SignalrDotnetCoreApi
             });
 
             services.AddSignalR();
+
+            services.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +61,12 @@ namespace SignalrDotnetCoreApi
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("chatHub");
             });
+        }
+
+        public void ConfigureContainer(IUnityContainer container)
+        {
+            // Could be used to register more types
+            //container.RegisterType<IMyService, MyService>();
         }
     }
 }

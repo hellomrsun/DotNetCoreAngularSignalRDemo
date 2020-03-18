@@ -24,6 +24,5 @@ namespace SignalrDotnetCoreApi.Controllers
 
             return StatusCode(200, true);
         }
-
     }
 }
