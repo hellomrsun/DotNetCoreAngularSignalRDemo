@@ -1,24 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SignalrDotnetCoreApi.Database.Entities;
+using SignalrDotnetCoreApi.Common.Entities;
 
 namespace SignalrDotnetCoreApi.Database.Context
 {
-    public class MyDbContext : DbContext
+    public interface IDbContext
     {
-        public MyDbContext(DbContextOptions options) : base(options)
-        {
+        DbSet<T> Set<T>() where T : class;
 
+        int SaveChanges();
+    }
+
+    public class MyDbContext : DbContext, IDbContext
+    {
+        public MyDbContext(string connectionString) : base(GetOptions(connectionString))
+        {
         }
 
-        public DbSet<Membership> Memberships { get; set; }
+        private static DbContextOptions GetOptions(string connectionString)
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+        }
 
-        public DbSet<Benefit> Benefits { get; set; }
-
-        public DbSet<MembershipVsBenefit> MembershipVsBenefits { get; set; }
+        public DbSet<Grape> Grapes { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    //optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=StoreDB;");
+        //    optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=StoreDB;");
         //}
     }
 }

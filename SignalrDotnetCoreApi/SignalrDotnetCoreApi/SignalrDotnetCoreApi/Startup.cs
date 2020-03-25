@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SignalrDotnetCoreApi.Common.Configuration;
 using Unity;
 
 namespace SignalrDotnetCoreApi
@@ -26,14 +27,12 @@ namespace SignalrDotnetCoreApi
             {
                 x.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Signalr .net core API",
+                    Title = "SignalR .NET core API",
                     Version = "v1"
                 });
             });
 
             services.AddSignalR();
-
-            services.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +51,7 @@ namespace SignalrDotnetCoreApi
 
             app.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API V1");
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "SignalR .NET core API V1");
                 x.RoutePrefix = string.Empty;
             });
 
@@ -66,7 +65,9 @@ namespace SignalrDotnetCoreApi
         public void ConfigureContainer(IUnityContainer container)
         {
             // Could be used to register more types
-            //container.RegisterType<IMyService, MyService>();
+            container.RegisterType<IConfigurationParser, ConfigurationParser>();
+            container.RegisterType<IConfigurationRetriever, ConfigurationRetriever>();
+
         }
     }
 }

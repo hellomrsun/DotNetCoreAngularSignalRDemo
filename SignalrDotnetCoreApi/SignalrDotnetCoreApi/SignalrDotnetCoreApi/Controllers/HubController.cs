@@ -15,7 +15,7 @@ namespace SignalrDotnetCoreApi.Controllers
         {
             this._hubContext = hubContext;
         }
-
+        
         [HttpPost]
         [Route("send")]
         public async Task<IActionResult> Send(Message message)
