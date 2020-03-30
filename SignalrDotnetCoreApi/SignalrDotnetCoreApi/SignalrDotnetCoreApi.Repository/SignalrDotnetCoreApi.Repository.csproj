@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SignalrDotnetCoreApi.Common\SignalrDotnetCoreApi.Common.csproj" />
     <ProjectReference Include="..\SignalrDotnetCoreApi.Database\SignalrDotnetCoreApi.Database.csproj" />
   </ItemGroup>
 

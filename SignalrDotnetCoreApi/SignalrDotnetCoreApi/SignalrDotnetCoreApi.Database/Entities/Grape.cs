@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SignalrDotnetCoreApi.Common.Entities
+namespace SignalrDotnetCoreApi.Database.Entities
 {
+    [Table("Grape", Schema ="dbo")]
     public class Grape
     {
         [Key]

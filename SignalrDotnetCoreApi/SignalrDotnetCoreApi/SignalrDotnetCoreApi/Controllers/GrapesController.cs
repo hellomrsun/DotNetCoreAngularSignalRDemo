@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SignalrDotnetCoreApi.Common.Entities;
+using SignalrDotnetCoreApi.Database.Entities;
 
 namespace SignalrDotnetCoreApi.Controllers
 {

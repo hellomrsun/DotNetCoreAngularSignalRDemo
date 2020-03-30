@@ -6,7 +6,7 @@ namespace SignalrDotnetCoreApi.Common.Configuration
 {
     public interface IConfigurationRetriever
     {
-        string MyDbConnectionString { get; }
+        string WineDbConnectionString { get; }
     }
     public class ConfigurationRetriever : IConfigurationRetriever
     {
@@ -17,11 +17,11 @@ namespace SignalrDotnetCoreApi.Common.Configuration
             this._parser = parser;
         }
 
-        public string MyDbConnectionString
+        public string WineDbConnectionString
         {
             get
             {
-               return _parser.Get<string>("ConnectionStrings", "MyDbConnection");
+               return _parser.Get<string>("ConnectionStrings", "WineDbConnection");
             }
         }
 

@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SignalrDotnetCoreApi.Common.Configuration;
+using SignalrDotnetCoreApi.Database.Context;
+using SignalrDotnetCoreApi.Repository.UnitOfWork;
 using Unity;
 
 namespace SignalrDotnetCoreApi
@@ -68,6 +70,9 @@ namespace SignalrDotnetCoreApi
             container.RegisterType<IConfigurationParser, ConfigurationParser>();
             container.RegisterType<IConfigurationRetriever, ConfigurationRetriever>();
 
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<IUnitOfWorkFactory, UnitOfWorkFactory>();
+            container.RegisterType<IDbContext, WineDbContext>(Configuration.GetConnectionString("WineDbConnection"));
         }
     }
 }

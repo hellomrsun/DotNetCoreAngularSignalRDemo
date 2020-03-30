@@ -1,11 +1,13 @@
 ﻿using SignalrDotnetCoreApi.Repository.Repository;
+using System;
+using System.Threading.Tasks;
 
 namespace SignalrDotnetCoreApi.Repository.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<T> GetRepository<T>() where T : class;
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

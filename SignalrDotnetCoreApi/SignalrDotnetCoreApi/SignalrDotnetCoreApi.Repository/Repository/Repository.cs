@@ -1,48 +1,51 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SignalrDotnetCoreApi.Database.Context;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SignalrDotnetCoreApi.Repository.Repository
 {
-    public class Repository<T> : IRepository<T> where T:class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
+        private readonly IDbContext dbContext;
 
         public Repository(IDbContext dbContext)
         {
             _dbSet = dbContext.Set<T>();
+            this.dbContext = dbContext;
         }
 
-        public void Add(T entity)
+        public async ValueTask AddAsync(T entity)
         {
-            _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
-        public void Edit(T entity)
+        public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Update(entity);
         }
 
-        public T GetById(int id)
+        public Task<T> FirstAsync()
         {
-            throw new NotImplementedException();
+            return _dbSet.FirstAsync();
         }
 
-        public IEnumerable<T> List()
+        public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _dbSet.Where(expression);
         }
 
-        public IEnumerable<T> List(Expression<Func<T, bool>> predicate)
+        public T First()
         {
-            throw new NotImplementedException();
+            return _dbSet.First();
         }
     }
 }

@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SignalrDotnetCoreApi.Common\SignalrDotnetCoreApi.Common.csproj" />
     <ProjectReference Include="..\SignalrDotnetCoreApi.Database\SignalrDotnetCoreApi.Database.csproj" />
+    <ProjectReference Include="..\SignalrDotnetCoreApi.Repository\SignalrDotnetCoreApi.Repository.csproj" />
   </ItemGroup>
 
 
