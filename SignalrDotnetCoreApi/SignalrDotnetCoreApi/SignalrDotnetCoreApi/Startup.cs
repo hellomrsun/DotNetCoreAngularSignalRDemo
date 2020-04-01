@@ -13,6 +13,8 @@ namespace SignalrDotnetCoreApi
 {
     public class Startup
     {
+        private readonly string _origins = "MyOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +36,18 @@ namespace SignalrDotnetCoreApi
                 });
             });
 
+            services.AddCors(o =>
+            {
+                o.AddPolicy(_origins,
+                    p =>
+                    { 
+                        p.WithOrigins("http://localhost:4200")
+                     .AllowAnyHeader()
+                     .AllowAnyMethod()
+                     .AllowAnyOrigin();
+                    });
+            });
+
             services.AddSignalR();
         }
 
@@ -48,6 +62,8 @@ namespace SignalrDotnetCoreApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(_origins);
 
             app.UseSwagger();
 

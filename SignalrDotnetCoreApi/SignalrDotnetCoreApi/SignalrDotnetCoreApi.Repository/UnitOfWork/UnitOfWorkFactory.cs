@@ -14,8 +14,7 @@ namespace SignalrDotnetCoreApi.Repository.UnitOfWork
 
         public IUnitOfWork Create()
         {
-            //var dbContext = new WineDbContext(_configRetriever.WineDbConnectionString);
-            var dbContext = new WineDbContext();
+            var dbContext = new WineDbContext(_configRetriever.WineDbConnectionString);
             return new UnitOfWork(dbContext);
         }
     }

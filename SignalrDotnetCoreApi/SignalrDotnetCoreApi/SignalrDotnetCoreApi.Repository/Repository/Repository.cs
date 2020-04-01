@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SignalrDotnetCoreApi.Database.Context;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace SignalrDotnetCoreApi.Repository.Repository
             _dbSet.Update(entity);
         }
 
+        public T First()
+        {
+            return _dbSet.First();
+        }
+
         public Task<T> FirstAsync()
         {
             return _dbSet.FirstAsync();
@@ -43,9 +49,10 @@ namespace SignalrDotnetCoreApi.Repository.Repository
             return _dbSet.Where(expression);
         }
 
-        public T First()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return _dbSet.First();
+            return await _dbSet.AsQueryable().ToListAsync();
         }
+
     }
 }
