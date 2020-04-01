@@ -1,0 +1,46 @@
+<h1>
+  Grapes
+</h1>
+
+<br />
+
+<nz-table #editRowTable nzBordered [nzData]="grapes">
+  <thead>
+    <tr>
+      <th nzWidth="30%">Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+      <td>
+        <div class="editable-cell" *ngIf="editId !== data.id; else editNameTpl">
+          <div class="editable-cell-value-wrap" (click)="editName(data.id, $event)">
+            {{ data.name }}
+          </div>
+        </div>
+        <ng-template #editNameTpl>
+          <input type="text" nz-input [(ngModel)]="data.name" />
+        </ng-template>
+      </td>
+      <td>
+        <div class="editable-cell" *ngIf="editId !== data.id; else editDescriptionTpl">
+          <div class="editable-cell-value-wrap" (click)="editDescription(data.id, $event)">
+            {{data.description}}
+          </div>
+        </div>
+        <ng-template #editDescriptionTpl>
+          <input type="text" nz-input [(ngModel)]="data.description" />
+        </ng-template>
+      </td>
+      <td>
+        <a nz-popconfirm nzTitle=" Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<button type="button">
+  <a routerLink="/add-grape" routerLinkActive="">Create new grape</a>
+</button>

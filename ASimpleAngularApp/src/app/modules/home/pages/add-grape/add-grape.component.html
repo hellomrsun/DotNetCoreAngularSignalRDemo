@@ -1,0 +1,17 @@
+<h1>Add new Grape</h1>
+
+<form>
+
+  <p>Name</p>
+  <p><input type="text" name="nameInput" [(ngModel)]="name" /></p>
+
+  <p>Description</p>
+  <p><input type="text" name="descriptionInput" [(ngModel)]="description" /></p>
+
+  <input type="submit" name="submitButton" (click)="Save()" title="Save" value="Create" />
+
+</form>
+
+<br />
+
+<button class="btn"><a routerLink="/grapes">Return</a></button>
