@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BrickComponent } from './brick.component';
+import { InfoPopupComponent } from './info-popup.component';
 
-describe('BrickComponent', () => {
-  let component: BrickComponent;
-  let fixture: ComponentFixture<BrickComponent>;
+describe('InfoPopupComponent', () => {
+  let component: InfoPopupComponent;
+  let fixture: ComponentFixture<InfoPopupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BrickComponent ]
+      declarations: [ InfoPopupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BrickComponent);
+    fixture = TestBed.createComponent(InfoPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

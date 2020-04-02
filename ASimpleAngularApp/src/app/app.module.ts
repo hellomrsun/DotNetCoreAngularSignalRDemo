@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HomeModule } from './modules/home/home.module';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
 

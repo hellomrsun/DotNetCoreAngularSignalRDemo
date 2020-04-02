@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrickComponent } from './brick/brick.component';
+import { InfoPopupComponent } from './components/info-popup/info-popup.component';
+import { NzModalModule } from 'ng-zorro-antd';
 
 @NgModule({
-  declarations: [BrickComponent],
+  declarations: [
+    InfoPopupComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    NzModalModule
   ],
   exports: [
-    BrickComponent
+    InfoPopupComponent
   ]
 })
 export class SharedModule { }

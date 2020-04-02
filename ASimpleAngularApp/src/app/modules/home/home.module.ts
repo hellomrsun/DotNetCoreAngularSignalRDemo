@@ -7,6 +7,7 @@ import { NzCardModule, NzTableModule, NzFormModule, NzPopconfirmModule } from 'n
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GrapesComponent } from './pages/grapes/grapes.component';
 import { AddGrapeComponent } from './pages/add-grape/add-grape.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AddGrapeComponent } from './pages/add-grape/add-grape.component';
     FormsModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    SharedModule
   ],
   exports: [WineRegionsComponent, GrapesComponent, AddGrapeComponent]
 })

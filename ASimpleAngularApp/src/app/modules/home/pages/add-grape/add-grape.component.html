@@ -15,3 +15,5 @@
 <br />
 
 <button class="btn"><a routerLink="/grapes">Return</a></button>
+
+<app-info-popup [(content)]="creationFinished" [(active)]="popupActive" (updateActive)="popupActive = $event"></app-info-popup>

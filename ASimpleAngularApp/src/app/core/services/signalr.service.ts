@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
-import { Message } from '../models/message';
+import { Message } from '../../shared/models/message';
 
 @Injectable({
   providedIn: 'root'

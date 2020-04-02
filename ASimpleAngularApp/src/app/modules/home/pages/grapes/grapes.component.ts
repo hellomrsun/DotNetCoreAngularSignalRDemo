@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Grape } from "src/app/models/grape";
-import { GrapeService } from 'src/app/services/grape.service';
+import { Grape } from "src/app/shared/models/grape";
+import { GrapeService } from 'src/app/core/services/grape.service';
 
 @Component({
   selector: 'app-grapes',

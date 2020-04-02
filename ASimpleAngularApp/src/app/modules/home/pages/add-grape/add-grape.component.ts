@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { GrapeService } from 'src/app/services/grape.service';
-import { Grape } from 'src/app/models/grape';
+import { GrapeService } from 'src/app/core/services/grape.service';
+import { Grape } from 'src/app/shared/models/grape';
 
 @Component({
   selector: 'app-add-grape',
@@ -12,6 +12,9 @@ export class AddGrapeComponent implements OnInit {
 
   public name: string;
   public description: string;
+
+  public creationFinished: string = "Grape is created";
+  public popupActive: boolean = false;
 
   constructor(private service: GrapeService) { }
 
@@ -28,7 +31,9 @@ export class AddGrapeComponent implements OnInit {
     this.service.Save(grape).subscribe(
       x => {
         console.log("Grape has been created successfully!");
-        alert("Grape has been created successfully!");
+        this.popupActive = true;
+        this.name = '';
+        this.description = '';
       },
       y => console.log("Failed to create grape!" + y));
   }
