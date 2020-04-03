@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,6 +19,7 @@
     <ProjectReference Include="..\SignalrDotnetCoreApi.Common\SignalrDotnetCoreApi.Common.csproj" />
     <ProjectReference Include="..\SignalrDotnetCoreApi.Database\SignalrDotnetCoreApi.Database.csproj" />
     <ProjectReference Include="..\SignalrDotnetCoreApi.Repository\SignalrDotnetCoreApi.Repository.csproj" />
+    <ProjectReference Include="..\SignalrDotnetCoreApi.Service\SignalrDotnetCoreApi.Service.csproj" />
   </ItemGroup>
 
 

@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using SignalrDotnetCoreApi.Common.Configuration;
 using SignalrDotnetCoreApi.Database.Context;
 using SignalrDotnetCoreApi.Repository.UnitOfWork;
+using SignalrDotnetCoreApi.Service.Services;
+using SignalrDotnetCoreApi.Service.SignalRHub;
 using Unity;
 
 namespace SignalrDotnetCoreApi
@@ -40,11 +42,11 @@ namespace SignalrDotnetCoreApi
             {
                 o.AddPolicy(_origins,
                     p =>
-                    { 
+                    {
                         p.WithOrigins("http://localhost:4200")
                      .AllowAnyHeader()
                      .AllowAnyMethod()
-                     .AllowAnyOrigin();
+                     .AllowCredentials();
                     });
             });
 
@@ -77,6 +79,7 @@ namespace SignalrDotnetCoreApi
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("chatHub");
+                endpoints.MapHub<GrapeHub>("/grapeHub");
             });
         }
 
@@ -85,6 +88,8 @@ namespace SignalrDotnetCoreApi
             // Could be used to register more types
             container.RegisterType<IConfigurationParser, ConfigurationParser>();
             container.RegisterType<IConfigurationRetriever, ConfigurationRetriever>();
+            container.RegisterType<IHubService, HubService>();
+            container.RegisterType<IGrapeService, GrapeService>();
 
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IUnitOfWorkFactory, UnitOfWorkFactory>();

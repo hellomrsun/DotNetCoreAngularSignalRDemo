@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Grape } from "src/app/shared/models/grape";
 import { GrapeService } from 'src/app/core/services/grape.service';
+import { GrapeHubService } from 'src/app/core/services/grape-hub.service';
 
 @Component({
   selector: 'app-grapes',
@@ -12,10 +13,11 @@ export class GrapesComponent implements OnInit {
   public editId: number;
   i = 0;
 
-  constructor(private service: GrapeService) { }
+  constructor(private service: GrapeService, private hub: GrapeHubService) { }
 
   ngOnInit(): void {
     this.GetGrapes();
+    this.SubscribeToHub();
   }
 
   addRow(): void {
@@ -65,6 +67,13 @@ export class GrapesComponent implements OnInit {
     this.service.GetAllGrapes().subscribe(x => {
       this.grapes = x;
     });
+  }
+
+  SubscribeToHub() {
+    this.hub.grapesReceived.subscribe((x: Grape[]) => {
+      console.log('grapes received in component from hub' + x);
+      this.grapes = x;
+    })
   }
 
 }

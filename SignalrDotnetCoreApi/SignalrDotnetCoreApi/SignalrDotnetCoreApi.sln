@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrDotnetCoreApi.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrDotnetCoreApi.Repository", "SignalrDotnetCoreApi.Repository\SignalrDotnetCoreApi.Repository.csproj", "{3C4B0F37-9FD9-4F75-BF03-DC9B301D6732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrDotnetCoreApi.Tests", "SignalrDotnetCoreApi.Tests\SignalrDotnetCoreApi.Tests.csproj", "{1EBBA5A3-0D63-4407-A43B-05E1C4903C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrDotnetCoreApi.Tests", "SignalrDotnetCoreApi.Tests\SignalrDotnetCoreApi.Tests.csproj", "{1EBBA5A3-0D63-4407-A43B-05E1C4903C1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrDotnetCoreApi.Service", "SignalrDotnetCoreApi.Service\SignalrDotnetCoreApi.Service.csproj", "{AE44F4B9-C02E-4E53-8E28-5A2601663E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1EBBA5A3-0D63-4407-A43B-05E1C4903C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EBBA5A3-0D63-4407-A43B-05E1C4903C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EBBA5A3-0D63-4407-A43B-05E1C4903C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE44F4B9-C02E-4E53-8E28-5A2601663E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE44F4B9-C02E-4E53-8E28-5A2601663E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE44F4B9-C02E-4E53-8E28-5A2601663E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE44F4B9-C02E-4E53-8E28-5A2601663E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
