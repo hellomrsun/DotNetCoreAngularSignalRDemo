@@ -37,7 +37,7 @@ namespace SignalrDotnetCoreApi
                     Version = "v1"
                 });
             });
-
+            
             services.AddCors(o =>
             {
                 o.AddPolicy(_origins,

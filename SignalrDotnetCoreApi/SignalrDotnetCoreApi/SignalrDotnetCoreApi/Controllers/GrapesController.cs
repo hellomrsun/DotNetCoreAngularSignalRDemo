@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using log4net;
+using log4net.Core;
 using Microsoft.AspNetCore.Mvc;
 using SignalrDotnetCoreApi.Database.Entities;
 using SignalrDotnetCoreApi.Service.Services;
@@ -11,6 +13,8 @@ namespace SignalrDotnetCoreApi.Controllers
     [ApiController]
     public class GrapesController : ControllerBase
     {
+        private readonly ILog _logger = LogManager.GetLogger(typeof(GrapesController));
+
         private readonly IGrapeService _grapeService;
         private readonly IHubService _hubService;
 
@@ -30,6 +34,8 @@ namespace SignalrDotnetCoreApi.Controllers
             
             await _hubService.SendGrapeMessageAsync();
 
+            _logger.Info("new Grape is added.");
+
             return Ok();
         }
 
@@ -38,6 +44,8 @@ namespace SignalrDotnetCoreApi.Controllers
         public async Task<ActionResult<List<Grape>>> Grapes()
         {
             var result = await _grapeService.GetGrapesAsync();
+
+            _logger.Info("Grapes are fetched.");
 
             return Ok(result);
         }
@@ -49,6 +57,8 @@ namespace SignalrDotnetCoreApi.Controllers
             await _grapeService.DeleteGrapeAsync(id);
 
             await _hubService.SendGrapeMessageAsync();
+
+            _logger.Info($"Grape with id:{id} is deleted.");
 
             return Ok();
         }
