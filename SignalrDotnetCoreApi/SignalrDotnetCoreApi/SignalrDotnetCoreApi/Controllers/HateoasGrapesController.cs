@@ -3,21 +3,22 @@ using System.Threading.Tasks;
 using log4net;
 using Microsoft.AspNetCore.Mvc;
 using SignalrDotnetCoreApi.Database.Entities;
+using SignalrDotnetCoreApi.Hateoas;
 using SignalrDotnetCoreApi.Service.Services;
 using SignalrDotnetCoreApi.Service.SignalRHub;
 
 namespace SignalrDotnetCoreApi.Controllers
 {
-    [Route("api/v1/grapes")]
+    [Route("api/v1/hateoas-grapes")]
     [ApiController]
-    public class GrapesController : ControllerBase
+    public class HateoasGrapesController : ControllerBase
     {
         private readonly ILog _logger = LogManager.GetLogger(typeof(GrapesController));
 
         private readonly IGrapeService _grapeService;
         private readonly IHubService _hubService;
 
-        public GrapesController(
+        public HateoasGrapesController(
             IGrapeService grapeService,
             IHubService hubService)
         {
@@ -29,7 +30,7 @@ namespace SignalrDotnetCoreApi.Controllers
         public async ValueTask<ActionResult> Add([FromBody] Grape grape)
         {
             await _grapeService.AddGrapeAsync(grape);
-            
+
             await _hubService.SendGrapeMessageAsync();
 
             _logger.Info("new Grape is added.");
@@ -38,13 +39,13 @@ namespace SignalrDotnetCoreApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Grape>>> Grapes()
+        public async Task<ActionResult<HateoasModel<IEnumerable<Grape>>>> Grapes()
         {
             var result = await _grapeService.GetGrapesAsync();
 
             _logger.Info("Grapes are fetched.");
 
-            return Ok(result);
+            return Ok(ToHateoasModel(result));
         }
 
         [HttpDelete]
@@ -58,6 +59,24 @@ namespace SignalrDotnetCoreApi.Controllers
             _logger.Info($"Grape with id:{id} is deleted.");
 
             return Ok();
+        }
+
+        private HateoasModel<T> ToHateoasModel<T>(T grape) where T : class
+        {
+            var baseUrl = Request.Host + "/api/v1/hateoas-grapes/";
+
+            var links = new List<Link>
+            {
+                new Link(baseUrl, "add_grape", "POST"),
+                new Link(baseUrl, "get_all", "GET"),
+                new Link(baseUrl, "delete_grape", "DELETE")
+            };
+
+            return new HateoasModel<T>()
+            {
+                Data = grape,
+                Links = links
+            };
         }
     }
 }

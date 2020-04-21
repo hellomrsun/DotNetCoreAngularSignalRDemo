@@ -12,19 +12,18 @@ export class GrapeService {
   constructor(private httpClient: HttpClient) { }
 
   public GetAllGrapes(): Observable<Grape[]> {
-    const url = environment.api + '/api/v1/Grapes/Grapes';
+    const url = environment.api + '/api/v1/grapes';
     return this.httpClient.get<Grape[]>(url);
   }
 
   public Save(grape: Grape): Observable<Object> {
-    const url = environment.api + '/api/v1/Grapes/Add';
-    return this.httpClient.put(url, grape);
+    const url = environment.api + '/api/v1/grapes';
+    return this.httpClient.post(url, grape);
   }
 
   public Delete(id: number) {
     console.log('delete');
-    const url = environment.api + '/api/v1/Grapes/Delete/' + id;
-
+    const url = environment.api + '/api/v1/grapes/' + id;
     return this.httpClient.delete(url);
   }
 
