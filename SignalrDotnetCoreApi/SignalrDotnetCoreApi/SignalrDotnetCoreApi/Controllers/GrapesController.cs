@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using log4net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalrDotnetCoreApi.Database.Entities;
 using SignalrDotnetCoreApi.Service.Services;
@@ -25,39 +27,92 @@ namespace SignalrDotnetCoreApi.Controllers
             _hubService = hubService;
         }
 
+        /// <summary>
+        /// Create a new grape
+        /// </summary>
+        /// <param name="grape">Grape</param>
+        /// <returns>grape creation result</returns>
+        /// <response code="201">Grape is created</response>
+        /// <response code="500">Internal Server Error</response> 
         [HttpPost]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async ValueTask<ActionResult> Add([FromBody] Grape grape)
         {
-            await _grapeService.AddGrapeAsync(grape);
-            
-            await _hubService.SendGrapeMessageAsync();
+            try
+            {
+                await _grapeService.AddGrapeAsync(grape);
 
-            _logger.Info("new Grape is added.");
+                await _hubService.SendGrapeMessageAsync();
 
-            return Ok();
+                _logger.Info("new Grape is added.");
+
+                return StatusCode(201, "Grape created");
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to create grape.", e);
+                return StatusCode(500, "Server error");
+            }
         }
 
+        /// <summary>
+        /// Get all the grapes
+        /// </summary>
+        /// <returns>A list of grapes</returns>
+        /// <response code="200">Returns a list of grapes</response>
+        /// <response code="500">Internal Server Error</response> 
         [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<Grape>>> Grapes()
         {
-            var result = await _grapeService.GetGrapesAsync();
+            try
+            {
+                var result = await _grapeService.GetGrapesAsync();
 
-            _logger.Info("Grapes are fetched.");
+                _logger.Info("Grapes are fetched.");
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to retrieve grapes.", e);
+                return StatusCode(500, "Failed");
+            }
         }
 
+        /// <summary>
+        /// Delete a grape
+        /// </summary>
+        /// <param name="id">grape id</param>
+        /// <returns></returns>
+        /// <response code="200">Deletion is ok</response>
+        /// <response code="500">Internal Server Error</response> 
         [HttpDelete]
         [Route("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {
-            await _grapeService.DeleteGrapeAsync(id);
+            try
+            {
+                await _grapeService.DeleteGrapeAsync(id);
 
-            await _hubService.SendGrapeMessageAsync();
+                await _hubService.SendGrapeMessageAsync();
 
-            _logger.Info($"Grape with id:{id} is deleted.");
+                _logger.Info($"Grape with id:{id} is deleted.");
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to delete grape.", e);
+                return StatusCode(500, "Failed");
+            }
         }
     }
 }
