@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Grape } from 'src/app/shared/models/grape';
 import { NotificationInfo } from 'src/app/shared/models/notification-info';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class GrapeHubService {
 
   public buildConnection() {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl("http://localhost:60956/grapeHub")
+      .withUrl(environment.api +"/grapeHub")
       .build();
   }
 
